@@ -1,0 +1,107 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<tictactoe-arm64-apple-macosx-release.exe>","<tictactoe-arm64-apple-macosx-release.module>"]
+  "test": ["<tictactoe-arm64-apple-macosx-release.exe>","<tictactoe-arm64-apple-macosx-release.module>"]
+  "tictactoe-arm64-apple-macosx-release.exe": ["<tictactoe-arm64-apple-macosx-release.exe>"]
+  "tictactoe-arm64-apple-macosx-release.module": ["<tictactoe-arm64-apple-macosx-release.module>"]
+default: "main"
+nodes:
+  "/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Library/Developer/CommandLineTools/usr/bin/swiftc"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/AppDelegate.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/AppSettings.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/ClickSoundEngine.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/KeyboardMonitor.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/PresetStore.swift","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/DerivedSources/resource_bundle_accessor.swift"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/sources"]
+    description: "Write auxiliary file /Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/sources"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppDelegate.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppSettings.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/ClickSoundEngine.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/KeyboardMonitor.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/PresetStore.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/resource_bundle_accessor.swift.o"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.product/Objects.LinkFileList"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-1.wav":
+    tool: copy-tool
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-1.wav"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-1.wav"]
+    description: "Copying /Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-1.wav"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-2.wav":
+    tool: copy-tool
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-2.wav"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-2.wav"]
+    description: "Copying /Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-2.wav"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-3.wav":
+    tool: copy-tool
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-3.wav"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-3.wav"]
+    description: "Copying /Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-3.wav"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-4.wav":
+    tool: copy-tool
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-4.wav"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-4.wav"]
+    description: "Copying /Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-4.wav"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-5.wav":
+    tool: copy-tool
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-5.wav"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-5.wav"]
+    description: "Copying /Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-5.wav"
+
+  "/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-6.wav":
+    tool: copy-tool
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-6.wav"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-6.wav"]
+    description: "Copying /Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/Resources/click-6.wav"
+
+  "<tictactoe-arm64-apple-macosx-release.exe>":
+    tool: phony
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe"]
+    outputs: ["<tictactoe-arm64-apple-macosx-release.exe>"]
+
+  "<tictactoe-arm64-apple-macosx-release.module>":
+    tool: phony
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppDelegate.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppSettings.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/ClickSoundEngine.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/KeyboardMonitor.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/PresetStore.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/resource_bundle_accessor.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/Modules/tictactoe.swiftmodule"]
+    outputs: ["<tictactoe-arm64-apple-macosx-release.module>"]
+
+  "C.tictactoe-arm64-apple-macosx-release.exe":
+    tool: shell
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppDelegate.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppSettings.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/ClickSoundEngine.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/KeyboardMonitor.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/PresetStore.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/resource_bundle_accessor.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.product/Objects.LinkFileList"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe"]
+    description: "Linking ./.build/arm64-apple-macosx/release/tictactoe"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-L","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release","-o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe","-module-name","tictactoe","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-dead_strip","-Xlinker","-alias","-Xlinker","_tictactoe_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Library/Developer/CommandLineTools/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx13.0","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g"]
+
+  "C.tictactoe-arm64-apple-macosx-release.module":
+    tool: shell
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/AppDelegate.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/AppSettings.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/ClickSoundEngine.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/KeyboardMonitor.swift","/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/PresetStore.swift","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/DerivedSources/resource_bundle_accessor.swift","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt","<tictactoe-arm64-apple-macosx-release.module-resources>","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/sources"]
+    outputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppDelegate.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/AppSettings.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/ClickSoundEngine.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/KeyboardMonitor.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/PresetStore.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/resource_bundle_accessor.swift.o","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/Modules/tictactoe.swiftmodule"]
+    description: "Compiling Swift Module 'tictactoe' (6 sources)"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-module-name","tictactoe","-emit-dependencies","-emit-module","-emit-module-path","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/Modules/tictactoe.swiftmodule","-output-file-map","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/output-file-map.json","-whole-module-optimization","-num-threads","10","-c","@/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe.build/sources","-I","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/Modules","-target","arm64-apple-macosx13.0","-whole-module-optimization","-num-threads","10","-serialize-diagnostics","-O","-j10","-DSWIFT_PACKAGE","-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE","-module-cache-path","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","tictactoe_main","-swift-version","6","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g","-Xcc","-isysroot","-Xcc","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-Xcc","-fPIC","-Xcc","-g","-package-name","tictactoe"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/Sources/MechaKeys/","/Users/jjirayu7/Desktop/tictactoe/Package.swift","/Users/jjirayu7/Desktop/tictactoe/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+
+  "tictactoe-arm64-apple-macosx-release.module-resources":
+    tool: phony
+    inputs: ["/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-1.wav","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-2.wav","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-3.wav","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-4.wav","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-5.wav","/Users/jjirayu7/Desktop/tictactoe/.build/arm64-apple-macosx/release/tictactoe_tictactoe.bundle/click-6.wav"]
+    outputs: ["<tictactoe-arm64-apple-macosx-release.module-resources>"]
+
