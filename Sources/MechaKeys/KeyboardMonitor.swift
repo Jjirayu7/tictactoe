@@ -5,6 +5,7 @@ final class KeyboardMonitor {
     private var tap: CFMachPort?
     private var source: CFRunLoopSource?
     private let onKeyDown: () -> Void
+    private var currentModifierFlags: CGEventFlags = []
 
     init(onKeyDown: @escaping () -> Void) {
         self.onKeyDown = onKeyDown
@@ -16,16 +17,28 @@ final class KeyboardMonitor {
 
     func start() {
         guard tap == nil, hasAccessibilityPermission else { return }
-        let mask = CGEventMask(1 << CGEventType.keyDown.rawValue)
+        let mask = CGEventMask(
+            (1 << CGEventType.keyDown.rawValue) |
+            (1 << CGEventType.flagsChanged.rawValue)
+        )
         let pointer = Unmanaged.passUnretained(self).toOpaque()
         tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
             options: .listenOnly,
             eventsOfInterest: mask,
-            callback: { _, type, _, userInfo in
-                guard type == .keyDown, let userInfo else { return nil }
-                Unmanaged<KeyboardMonitor>.fromOpaque(userInfo).takeUnretainedValue().onKeyDown()
+            callback: { _, type, event, userInfo in
+                guard let userInfo else { return nil }
+                let monitor = Unmanaged<KeyboardMonitor>.fromOpaque(userInfo).takeUnretainedValue()
+
+                switch type {
+                case .keyDown:
+                    monitor.onKeyDown()
+                case .flagsChanged:
+                    monitor.handleModifierFlagsChanged(event: event)
+                default:
+                    break
+                }
                 return nil
             },
             userInfo: pointer
@@ -44,6 +57,26 @@ final class KeyboardMonitor {
         if let tap { CGEvent.tapEnable(tap: tap, enable: false) }
         source = nil
         tap = nil
+        currentModifierFlags = []
+    }
+
+    private func handleModifierFlagsChanged(event: CGEvent?) {
+        guard let event else { return }
+        let modifierMask: CGEventFlags = [
+            .maskCommand,
+            .maskShift,
+            .maskAlphaShift,
+            .maskAlternate,
+            .maskControl,
+            .maskSecondaryFn
+        ]
+        let nextModifierFlags = event.flags.intersection(modifierMask)
+        let newlyPressedFlags = nextModifierFlags.subtracting(currentModifierFlags)
+        currentModifierFlags = nextModifierFlags
+
+        if !newlyPressedFlags.isEmpty {
+            onKeyDown()
+        }
     }
 
     deinit { stop() }
