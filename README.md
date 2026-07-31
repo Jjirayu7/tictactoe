@@ -1,4 +1,5 @@
-# tictactoe
+# TICTACTOE
+Emulate the sound of a mechanical keyboard to a MacBook keyboard with Swift
 ```sh
 swift test
 swift build -c release
