@@ -10,7 +10,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "tictactoe",
-            path: "Sources/MechaKeys",
+            path: "Sources/TicTacToe",
             resources: [.process("Resources")]
         )
     ]

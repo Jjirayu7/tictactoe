@@ -110,7 +110,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let deleteButton = NSButton(title: "ลบ", target: self, action: #selector(deletePreset))
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         deletePresetButton = deleteButton
-        let importButton = NSButton(title: "นำเข้าเสียงแทนที่", target: self, action: #selector(importSound))
+        let importButton = NSButton(title: "นำเข้าเสียง", target: self, action: #selector(importSound))
         importButton.translatesAutoresizingMaskIntoConstraints = false
         importSoundButton = importButton
 
