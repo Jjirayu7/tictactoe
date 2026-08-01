@@ -1,9 +1,5 @@
-# tictactoe
-
-Native macOS prototype that plays a low-latency mechanical click for global keyboard presses.
-
-## Build
-
+# TICTACTOE
+Emulate the sound of a mechanical keyboard to a MacBook keyboard with Swift
 ```sh
 swift test
 swift build -c release
