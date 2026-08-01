@@ -5,12 +5,70 @@ struct SoundPreset: Codable, Identifiable, Equatable {
     var name: String
     var audioPath: String?
     let isDefault: Bool
+    var volumeDB: Float
+    var speed: Float
+    var eqLow: Float
+    var eqMid: Float
+    var eqHigh: Float
 
-    init(id: UUID = UUID(), name: String, audioPath: String? = nil, isDefault: Bool = false) {
+    private enum CodingKeys: String, CodingKey {
+        case id, name, audioPath, isDefault, volumeDB, volume, speed, eqLow, eqMid, eqHigh
+    }
+
+    init(
+        id: UUID = UUID(),
+        name: String,
+        audioPath: String? = nil,
+        isDefault: Bool = false,
+        volumeDB: Float = 0,
+        speed: Float = 1,
+        eqLow: Float = 0,
+        eqMid: Float = 0,
+        eqHigh: Float = 0
+    ) {
         self.id = id
         self.name = name
         self.audioPath = audioPath
         self.isDefault = isDefault
+        self.volumeDB = min(max(volumeDB, -60), 24)
+        self.speed = min(max(speed, 0.5), 2)
+        self.eqLow = min(max(eqLow, -12), 12)
+        self.eqMid = min(max(eqMid, -12), 12)
+        self.eqHigh = min(max(eqHigh, -12), 12)
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            id: try container.decode(UUID.self, forKey: .id),
+            name: try container.decode(String.self, forKey: .name),
+            audioPath: try container.decodeIfPresent(String.self, forKey: .audioPath),
+            isDefault: try container.decode(Bool.self, forKey: .isDefault),
+            volumeDB: try container.decodeIfPresent(Float.self, forKey: .volumeDB)
+                ?? Self.linearVolumeToDecibels(try container.decodeIfPresent(Float.self, forKey: .volume) ?? 1),
+            speed: try container.decodeIfPresent(Float.self, forKey: .speed) ?? 1,
+            eqLow: try container.decodeIfPresent(Float.self, forKey: .eqLow) ?? 0,
+            eqMid: try container.decodeIfPresent(Float.self, forKey: .eqMid) ?? 0,
+            eqHigh: try container.decodeIfPresent(Float.self, forKey: .eqHigh) ?? 0
+        )
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encodeIfPresent(audioPath, forKey: .audioPath)
+        try container.encode(isDefault, forKey: .isDefault)
+        try container.encode(volumeDB, forKey: .volumeDB)
+        try container.encode(speed, forKey: .speed)
+        try container.encode(eqLow, forKey: .eqLow)
+        try container.encode(eqMid, forKey: .eqMid)
+        try container.encode(eqHigh, forKey: .eqHigh)
+    }
+
+    private static func linearVolumeToDecibels(_ value: Float) -> Float {
+        guard value > 0 else { return -60 }
+        return min(max(20 * log10(value), -60), 24)
     }
 }
 
@@ -85,6 +143,16 @@ final class PresetStore {
         save()
     }
 
+    func updateSelectedSoundSettings(volumeDB: Float, speed: Float, eqLow: Float, eqMid: Float, eqHigh: Float) {
+        guard let index = presets.firstIndex(where: { $0.id == selectedPresetID }), !presets[index].isDefault else { return }
+        presets[index].volumeDB = min(max(volumeDB, -60), 24)
+        presets[index].speed = min(max(speed, 0.5), 2)
+        presets[index].eqLow = min(max(eqLow, -12), 12)
+        presets[index].eqMid = min(max(eqMid, -12), 12)
+        presets[index].eqHigh = min(max(eqHigh, -12), 12)
+        save()
+    }
+
     func deleteSelected() {
         guard let index = presets.firstIndex(where: { $0.id == selectedPresetID }), !presets[index].isDefault else { return }
         let removed = presets.remove(at: index)
@@ -95,7 +163,7 @@ final class PresetStore {
 
     func replaceSelectedAudio(with sourceURL: URL) throws {
         let ext = sourceURL.pathExtension.lowercased()
-        guard ["wav", "caf", "aiff", "aif", "m4a"].contains(ext) else {
+        guard ["wav", "caf", "aiff", "aif", "m4a", "mp3"].contains(ext) else {
             throw CocoaError(.fileReadUnsupportedScheme)
         }
         guard let index = presets.firstIndex(where: { $0.id == selectedPresetID }) else { return }
