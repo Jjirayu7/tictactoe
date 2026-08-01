@@ -4,6 +4,8 @@
 <dict>
     <key>CFBundleDisplayName</key>
     <string>tictactoe</string>
+    <key>CFBundleIconFile</key>
+    <string>tictactoe.icns</string>
     <key>CFBundleExecutable</key>
     <string>tictactoe</string>
     <key>CFBundleIdentifier</key>

@@ -33,6 +33,7 @@ final class KeyboardMonitor {
 
                 switch type {
                 case .keyDown:
+                    guard event.getIntegerValueField(.keyboardEventAutorepeat) == 0 else { return nil }
                     monitor.onKeyDown()
                 case .flagsChanged:
                     monitor.handleModifierFlagsChanged(event: event)
